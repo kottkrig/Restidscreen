@@ -23,3 +23,4 @@ erl_crash.dump
 restid-*.tar
 
 /.elixir_ls
+.DS_Store
