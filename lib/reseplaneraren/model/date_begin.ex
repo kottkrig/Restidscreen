@@ -4,7 +4,7 @@
 
 defmodule Reseplaneraren.Model.DateBegin do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
@@ -13,15 +13,15 @@ defmodule Reseplaneraren.Model.DateBegin do
   ]
 
   @type t :: %__MODULE__{
-    :"$" => Date.t
-  }
+          :"$" => Date.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.DateBegin do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
     |> deserialize(:"$", :date, nil, options)
   end
 end
-

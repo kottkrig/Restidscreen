@@ -4,35 +4,35 @@
 
 defmodule Reseplaneraren.Model.DepartureBoard do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"errorText",
-    :"Departure",
-    :"error",
-    :"serverdate",
-    :"servertime",
-    :"noNamespaceSchemaLocation"
+    :errorText,
+    :Departure,
+    :error,
+    :serverdate,
+    :servertime,
+    :noNamespaceSchemaLocation
   ]
 
   @type t :: %__MODULE__{
-    :"errorText" => String.t,
-    :"Departure" => [Departure],
-    :"error" => String.t,
-    :"serverdate" => Date.t,
-    :"servertime" => String.t,
-    :"noNamespaceSchemaLocation" => String.t
-  }
+          :errorText => String.t(),
+          :Departure => [Departure],
+          :error => String.t(),
+          :serverdate => Date.t(),
+          :servertime => String.t(),
+          :noNamespaceSchemaLocation => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.DepartureBoard do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Departure", :list, Reseplaneraren.Model.Departure, options)
-    |> deserialize(:"serverdate", :date, nil, options)
+    |> deserialize(:Departure, :list, Reseplaneraren.Model.Departure, options)
+    |> deserialize(:serverdate, :date, nil, options)
   end
 end
-

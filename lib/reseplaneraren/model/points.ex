@@ -4,24 +4,24 @@
 
 defmodule Reseplaneraren.Model.Points do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Point"
+    :Point
   ]
 
   @type t :: %__MODULE__{
-    :"Point" => [Point]
-  }
+          :Point => [Point]
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Points do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Point", :list, Reseplaneraren.Model.Point, options)
+    |> deserialize(:Point, :list, Reseplaneraren.Model.Point, options)
   end
 end
-

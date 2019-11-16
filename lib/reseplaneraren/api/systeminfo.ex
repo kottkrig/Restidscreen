@@ -10,7 +10,6 @@ defmodule Reseplaneraren.Api.Systeminfo do
   alias Reseplaneraren.Connection
   import Reseplaneraren.RequestBuilder
 
-
   @doc """
   Provides information about the journey planner and the underlying data
   Provides information about the journey planner and underlying data. It will return the begin of end of the timetable period and the creation date of the timetable data.
@@ -27,12 +26,14 @@ defmodule Reseplaneraren.Api.Systeminfo do
   {:ok, %Reseplaneraren.Model.SystemInfo{}} on success
   {:error, info} on failure
   """
-  @spec get_system_info(Tesla.Env.client, keyword()) :: {:ok, Reseplaneraren.Model.SystemInfo.t} | {:error, Tesla.Env.t}
+  @spec get_system_info(Tesla.Env.client(), keyword()) ::
+          {:ok, Reseplaneraren.Model.SystemInfo.t()} | {:error, Tesla.Env.t()}
   def get_system_info(connection, opts \\ []) do
     optional_params = %{
-      :"format" => :query,
-      :"jsonpCallback" => :query
+      :format => :query,
+      :jsonpCallback => :query
     }
+
     %{}
     |> method(:get)
     |> url("/systeminfo")

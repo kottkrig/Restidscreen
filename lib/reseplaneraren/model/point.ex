@@ -4,19 +4,19 @@
 
 defmodule Reseplaneraren.Model.Point do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"lon",
-    :"lat"
+    :lon,
+    :lat
   ]
 
   @type t :: %__MODULE__{
-    :"lon" => String.t,
-    :"lat" => String.t
-  }
+          :lon => String.t(),
+          :lat => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Point do
@@ -24,4 +24,3 @@ defimpl Poison.Decoder, for: Reseplaneraren.Model.Point do
     value
   end
 end
-

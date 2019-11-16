@@ -4,38 +4,38 @@
 
 defmodule Reseplaneraren.Model.LocationList do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"errorText",
-    :"error",
-    :"serverdate",
-    :"servertime",
-    :"StopLocation",
-    :"CoordLocation",
-    :"noNamespaceSchemaLocation"
+    :errorText,
+    :error,
+    :serverdate,
+    :servertime,
+    :StopLocation,
+    :CoordLocation,
+    :noNamespaceSchemaLocation
   ]
 
   @type t :: %__MODULE__{
-    :"errorText" => String.t,
-    :"error" => String.t,
-    :"serverdate" => Date.t,
-    :"servertime" => String.t,
-    :"StopLocation" => [StopLocation],
-    :"CoordLocation" => [CoordLocation],
-    :"noNamespaceSchemaLocation" => String.t
-  }
+          :errorText => String.t(),
+          :error => String.t(),
+          :serverdate => Date.t(),
+          :servertime => String.t(),
+          :StopLocation => [StopLocation],
+          :CoordLocation => [CoordLocation],
+          :noNamespaceSchemaLocation => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.LocationList do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"serverdate", :date, nil, options)
-    |> deserialize(:"StopLocation", :list, Reseplaneraren.Model.StopLocation, options)
-    |> deserialize(:"CoordLocation", :list, Reseplaneraren.Model.CoordLocation, options)
+    |> deserialize(:serverdate, :date, nil, options)
+    |> deserialize(:StopLocation, :list, Reseplaneraren.Model.StopLocation, options)
+    |> deserialize(:CoordLocation, :list, Reseplaneraren.Model.CoordLocation, options)
   end
 end
-

@@ -4,24 +4,24 @@
 
 defmodule Reseplaneraren.Model.Notes do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Note"
+    :Note
   ]
 
   @type t :: %__MODULE__{
-    :"Note" => [Note]
-  }
+          :Note => [Note]
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Notes do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Note", :list, Reseplaneraren.Model.Note, options)
+    |> deserialize(:Note, :list, Reseplaneraren.Model.Note, options)
   end
 end
-

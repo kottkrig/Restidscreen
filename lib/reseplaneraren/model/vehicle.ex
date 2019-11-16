@@ -4,33 +4,33 @@
 
 defmodule Reseplaneraren.Model.Vehicle do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"lcolor",
-    :"prodClass",
-    :"bcolor",
-    :"direction",
-    :"name",
-    :"gid",
-    :"delay",
-    :"y",
-    :"x"
+    :lcolor,
+    :prodClass,
+    :bcolor,
+    :direction,
+    :name,
+    :gid,
+    :delay,
+    :y,
+    :x
   ]
 
   @type t :: %__MODULE__{
-    :"lcolor" => String.t,
-    :"prodClass" => String.t,
-    :"bcolor" => String.t,
-    :"direction" => integer(),
-    :"name" => String.t,
-    :"gid" => String.t,
-    :"delay" => integer(),
-    :"y" => float(),
-    :"x" => float()
-  }
+          :lcolor => String.t(),
+          :prodClass => String.t(),
+          :bcolor => String.t(),
+          :direction => integer(),
+          :name => String.t(),
+          :gid => String.t(),
+          :delay => integer(),
+          :y => float(),
+          :x => float()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Vehicle do
@@ -38,4 +38,3 @@ defimpl Poison.Decoder, for: Reseplaneraren.Model.Vehicle do
     value
   end
 end
-

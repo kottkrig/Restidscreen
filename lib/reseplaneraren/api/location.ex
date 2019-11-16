@@ -10,7 +10,6 @@ defmodule Reseplaneraren.Api.Location do
   alias Reseplaneraren.Connection
   import Reseplaneraren.RequestBuilder
 
-
   @doc """
   Returns a list of all stops available in the journey planner.
   Returns a list of all stops available in the journey planner. Be aware that a call of this service is very time consuming and should be only requested when it is really needed.
@@ -27,12 +26,14 @@ defmodule Reseplaneraren.Api.Location do
   {:ok, %Reseplaneraren.Model.LocationList{}} on success
   {:error, info} on failure
   """
-  @spec get_all_stops(Tesla.Env.client, keyword()) :: {:ok, Reseplaneraren.Model.LocationList.t} | {:error, Tesla.Env.t}
+  @spec get_all_stops(Tesla.Env.client(), keyword()) ::
+          {:ok, Reseplaneraren.Model.LocationList.t()} | {:error, Tesla.Env.t()}
   def get_all_stops(connection, opts \\ []) do
     optional_params = %{
-      :"format" => :query,
-      :"jsonpCallback" => :query
+      :format => :query,
+      :jsonpCallback => :query
     }
+
     %{}
     |> method(:get)
     |> url("/location.allstops")
@@ -59,13 +60,15 @@ defmodule Reseplaneraren.Api.Location do
   {:ok, %Reseplaneraren.Model.LocationList{}} on success
   {:error, info} on failure
   """
-  @spec get_location_by_name(Tesla.Env.client, keyword()) :: {:ok, Reseplaneraren.Model.LocationList.t} | {:error, Tesla.Env.t}
+  @spec get_location_by_name(Tesla.Env.client(), keyword()) ::
+          {:ok, Reseplaneraren.Model.LocationList.t()} | {:error, Tesla.Env.t()}
   def get_location_by_name(connection, opts \\ []) do
     optional_params = %{
-      :"input" => :query,
-      :"format" => :query,
-      :"jsonpCallback" => :query
+      :input => :query,
+      :format => :query,
+      :jsonpCallback => :query
     }
+
     %{}
     |> method(:get)
     |> url("/location.name")
@@ -77,7 +80,7 @@ defmodule Reseplaneraren.Api.Location do
 
   @doc """
   Returns the address nearest a given coordinate.
-  
+
 
   ## Parameters
 
@@ -93,17 +96,19 @@ defmodule Reseplaneraren.Api.Location do
   {:ok, %Reseplaneraren.Model.LocationList{}} on success
   {:error, info} on failure
   """
-  @spec get_nearby_address(Tesla.Env.client, float(), float(), keyword()) :: {:ok, Reseplaneraren.Model.LocationList.t} | {:error, Tesla.Env.t}
+  @spec get_nearby_address(Tesla.Env.client(), float(), float(), keyword()) ::
+          {:ok, Reseplaneraren.Model.LocationList.t()} | {:error, Tesla.Env.t()}
   def get_nearby_address(connection, origin_coord_lat, origin_coord_long, opts \\ []) do
     optional_params = %{
-      :"format" => :query,
-      :"jsonpCallback" => :query
+      :format => :query,
+      :jsonpCallback => :query
     }
+
     %{}
     |> method(:get)
     |> url("/location.nearbyaddress")
-    |> add_param(:query, :"originCoordLat", origin_coord_lat)
-    |> add_param(:query, :"originCoordLong", origin_coord_long)
+    |> add_param(:query, :originCoordLat, origin_coord_lat)
+    |> add_param(:query, :originCoordLong, origin_coord_long)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
@@ -130,19 +135,21 @@ defmodule Reseplaneraren.Api.Location do
   {:ok, %Reseplaneraren.Model.LocationList{}} on success
   {:error, info} on failure
   """
-  @spec get_nearby_stops(Tesla.Env.client, float(), float(), keyword()) :: {:ok, Reseplaneraren.Model.LocationList.t} | {:error, Tesla.Env.t}
+  @spec get_nearby_stops(Tesla.Env.client(), float(), float(), keyword()) ::
+          {:ok, Reseplaneraren.Model.LocationList.t()} | {:error, Tesla.Env.t()}
   def get_nearby_stops(connection, origin_coord_lat, origin_coord_long, opts \\ []) do
     optional_params = %{
-      :"maxNo" => :query,
-      :"maxDist" => :query,
-      :"format" => :query,
-      :"jsonpCallback" => :query
+      :maxNo => :query,
+      :maxDist => :query,
+      :format => :query,
+      :jsonpCallback => :query
     }
+
     %{}
     |> method(:get)
     |> url("/location.nearbystops")
-    |> add_param(:query, :"originCoordLat", origin_coord_lat)
-    |> add_param(:query, :"originCoordLong", origin_coord_long)
+    |> add_param(:query, :originCoordLat, origin_coord_lat)
+    |> add_param(:query, :originCoordLong, origin_coord_long)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

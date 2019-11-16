@@ -4,32 +4,32 @@
 
 defmodule Reseplaneraren.Model.Trip do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"Leg",
-    :"travelWarranty",
-    :"valid",
-    :"alternative",
-    :"type"
+    :Leg,
+    :travelWarranty,
+    :valid,
+    :alternative,
+    :type
   ]
 
   @type t :: %__MODULE__{
-    :"Leg" => [Leg],
-    :"travelWarranty" => boolean(),
-    :"valid" => boolean(),
-    :"alternative" => boolean(),
-    :"type" => String.t
-  }
+          :Leg => [Leg],
+          :travelWarranty => boolean(),
+          :valid => boolean(),
+          :alternative => boolean(),
+          :type => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Trip do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"Leg", :list, Reseplaneraren.Model.Leg, options)
+    |> deserialize(:Leg, :list, Reseplaneraren.Model.Leg, options)
   end
 end
-

@@ -10,9 +10,9 @@ defmodule Reseplaneraren.Connection do
   use Tesla
 
   # Add any middleware here (authentication)
-  plug Tesla.Middleware.BaseUrl, "https://api.vasttrafik.se/bin/rest.exe/v2"
-  plug Tesla.Middleware.Headers, %{"User-Agent" => "Elixir"}
-  plug Tesla.Middleware.EncodeJson
+  plug(Tesla.Middleware.BaseUrl, "https://api.vasttrafik.se/bin/rest.exe/v2")
+  plug(Tesla.Middleware.Headers, %{"User-Agent" => "Elixir"})
+  plug(Tesla.Middleware.EncodeJson)
 
   @doc """
   Configure an authless client connection
@@ -21,7 +21,7 @@ defmodule Reseplaneraren.Connection do
 
   Tesla.Env.client
   """
-  @spec new() :: Tesla.Env.client
+  @spec new() :: Tesla.Env.client()
   def new do
     Tesla.build_client([])
   end

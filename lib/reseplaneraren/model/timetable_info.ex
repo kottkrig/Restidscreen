@@ -4,27 +4,27 @@
 
 defmodule Reseplaneraren.Model.TimetableInfo do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"TimeTableData",
-    :"TimeTablePeriod"
+    :TimeTableData,
+    :TimeTablePeriod
   ]
 
   @type t :: %__MODULE__{
-    :"TimeTableData" => TimeTableData,
-    :"TimeTablePeriod" => TimeTablePeriod
-  }
+          :TimeTableData => TimeTableData,
+          :TimeTablePeriod => TimeTablePeriod
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.TimetableInfo do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"TimeTableData", :struct, Reseplaneraren.Model.TimeTableData, options)
-    |> deserialize(:"TimeTablePeriod", :struct, Reseplaneraren.Model.TimeTablePeriod, options)
+    |> deserialize(:TimeTableData, :struct, Reseplaneraren.Model.TimeTableData, options)
+    |> deserialize(:TimeTablePeriod, :struct, Reseplaneraren.Model.TimeTablePeriod, options)
   end
 end
-

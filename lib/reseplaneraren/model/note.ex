@@ -4,21 +4,21 @@
 
 defmodule Reseplaneraren.Model.Note do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"priority",
-    :"severity",
-    :"key"
+    :priority,
+    :severity,
+    :key
   ]
 
   @type t :: %__MODULE__{
-    :"priority" => String.t,
-    :"severity" => String.t,
-    :"key" => String.t
-  }
+          :priority => String.t(),
+          :severity => String.t(),
+          :key => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Note do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: Reseplaneraren.Model.Note do
     value
   end
 end
-

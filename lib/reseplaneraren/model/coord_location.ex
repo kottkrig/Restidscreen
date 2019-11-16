@@ -4,25 +4,25 @@
 
 defmodule Reseplaneraren.Model.CoordLocation do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"lon",
-    :"idx",
-    :"name",
-    :"type",
-    :"lat"
+    :lon,
+    :idx,
+    :name,
+    :type,
+    :lat
   ]
 
   @type t :: %__MODULE__{
-    :"lon" => String.t,
-    :"idx" => String.t,
-    :"name" => String.t,
-    :"type" => String.t,
-    :"lat" => String.t
-  }
+          :lon => String.t(),
+          :idx => String.t(),
+          :name => String.t(),
+          :type => String.t(),
+          :lat => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.CoordLocation do
@@ -30,4 +30,3 @@ defimpl Poison.Decoder, for: Reseplaneraren.Model.CoordLocation do
     value
   end
 end
-

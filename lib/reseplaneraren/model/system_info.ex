@@ -4,35 +4,35 @@
 
 defmodule Reseplaneraren.Model.SystemInfo do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"TimetableInfo",
-    :"errorText",
-    :"error",
-    :"serverdate",
-    :"servertime",
-    :"noNamespaceSchemaLocation"
+    :TimetableInfo,
+    :errorText,
+    :error,
+    :serverdate,
+    :servertime,
+    :noNamespaceSchemaLocation
   ]
 
   @type t :: %__MODULE__{
-    :"TimetableInfo" => TimetableInfo,
-    :"errorText" => String.t,
-    :"error" => String.t,
-    :"serverdate" => Date.t,
-    :"servertime" => String.t,
-    :"noNamespaceSchemaLocation" => String.t
-  }
+          :TimetableInfo => TimetableInfo,
+          :errorText => String.t(),
+          :error => String.t(),
+          :serverdate => Date.t(),
+          :servertime => String.t(),
+          :noNamespaceSchemaLocation => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.SystemInfo do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"TimetableInfo", :struct, Reseplaneraren.Model.TimetableInfo, options)
-    |> deserialize(:"serverdate", :date, nil, options)
+    |> deserialize(:TimetableInfo, :struct, Reseplaneraren.Model.TimetableInfo, options)
+    |> deserialize(:serverdate, :date, nil, options)
   end
 end
-

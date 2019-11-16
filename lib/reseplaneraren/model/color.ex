@@ -4,21 +4,21 @@
 
 defmodule Reseplaneraren.Model.Color do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"bgColor",
-    :"fgColor",
-    :"stroke"
+    :bgColor,
+    :fgColor,
+    :stroke
   ]
 
   @type t :: %__MODULE__{
-    :"bgColor" => String.t,
-    :"fgColor" => String.t,
-    :"stroke" => String.t
-  }
+          :bgColor => String.t(),
+          :fgColor => String.t(),
+          :stroke => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Color do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: Reseplaneraren.Model.Color do
     value
   end
 end
-

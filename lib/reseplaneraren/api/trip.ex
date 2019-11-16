@@ -10,7 +10,6 @@ defmodule Reseplaneraren.Api.Trip do
   alias Reseplaneraren.Connection
   import Reseplaneraren.RequestBuilder
 
-
   @doc """
   Calculates a trip from a specified origin to a specified destination.
   Calculates a trip from a specified origin to a specified destination. These might be stop/station IDs or coordinates based on addresses and points of interest validated by the location service or coordinates freely defined by the client. Parameters specifying both origin and destination are mandatory in calls to the trip service. When specifying a stop as origin, the parameter originId is used, while originCoordLat, originCoordLong, and originCoordName are used to specify a (named) coordinate. For the destination, the corresponding parameters are named either destId or destCoordLat, destCoordLong and destCoordName. It is also possible to define a via-stop/station. This forces the journey planner to search for trips which pass the defined station. The parameter is called viaId. When searching for a trip that goes via a coordinate, rather than a stop, two separate trip requests need to be combined into one.
@@ -75,60 +74,62 @@ defmodule Reseplaneraren.Api.Trip do
   {:ok, %Reseplaneraren.Model.TripList{}} on success
   {:error, info} on failure
   """
-  @spec get_trip(Tesla.Env.client, keyword()) :: {:ok, Reseplaneraren.Model.TripList.t} | {:error, Tesla.Env.t}
+  @spec get_trip(Tesla.Env.client(), keyword()) ::
+          {:ok, Reseplaneraren.Model.TripList.t()} | {:error, Tesla.Env.t()}
   def get_trip(connection, opts \\ []) do
     optional_params = %{
-      :"originId" => :query,
-      :"originCoordLat" => :query,
-      :"originCoordLong" => :query,
-      :"originCoordName" => :query,
-      :"destId" => :query,
-      :"destCoordLat" => :query,
-      :"destCoordLong" => :query,
-      :"destCoordName" => :query,
-      :"viaId" => :query,
-      :"date" => :query,
-      :"time" => :query,
-      :"searchForArrival" => :query,
-      :"useVas" => :query,
-      :"useLDTrain" => :query,
-      :"useRegTrain" => :query,
-      :"useBus" => :query,
-      :"useMedical" => :query,
-      :"originMedicalCon" => :query,
-      :"destMedicalCon" => :query,
-      :"wheelChairSpace" => :query,
-      :"strollerSpace" => :query,
-      :"lowFloor" => :query,
-      :"rampOrLift" => :query,
-      :"useBoat" => :query,
-      :"useTram" => :query,
-      :"usePT" => :query,
-      :"excludeDR" => :query,
-      :"maxWalkDist" => :query,
-      :"walkSpeed" => :query,
-      :"originWalk" => :query,
-      :"destWalk" => :query,
-      :"onlyWalk" => :query,
-      :"originBike" => :query,
-      :"maxBikeDist" => :query,
-      :"bikeCriterion" => :query,
-      :"bikeProfile" => :query,
-      :"onlyBike" => :query,
-      :"originCar" => :query,
-      :"originCarWithParking" => :query,
-      :"maxCarDist" => :query,
-      :"onlyCar" => :query,
-      :"maxChanges" => :query,
-      :"additionalChangeTime" => :query,
-      :"disregardDefaultChangeMargin" => :query,
-      :"needJourneyDetail" => :query,
-      :"needGeo" => :query,
-      :"needItinerary" => :query,
-      :"numTrips" => :query,
-      :"format" => :query,
-      :"jsonpCallback" => :query
+      :originId => :query,
+      :originCoordLat => :query,
+      :originCoordLong => :query,
+      :originCoordName => :query,
+      :destId => :query,
+      :destCoordLat => :query,
+      :destCoordLong => :query,
+      :destCoordName => :query,
+      :viaId => :query,
+      :date => :query,
+      :time => :query,
+      :searchForArrival => :query,
+      :useVas => :query,
+      :useLDTrain => :query,
+      :useRegTrain => :query,
+      :useBus => :query,
+      :useMedical => :query,
+      :originMedicalCon => :query,
+      :destMedicalCon => :query,
+      :wheelChairSpace => :query,
+      :strollerSpace => :query,
+      :lowFloor => :query,
+      :rampOrLift => :query,
+      :useBoat => :query,
+      :useTram => :query,
+      :usePT => :query,
+      :excludeDR => :query,
+      :maxWalkDist => :query,
+      :walkSpeed => :query,
+      :originWalk => :query,
+      :destWalk => :query,
+      :onlyWalk => :query,
+      :originBike => :query,
+      :maxBikeDist => :query,
+      :bikeCriterion => :query,
+      :bikeProfile => :query,
+      :onlyBike => :query,
+      :originCar => :query,
+      :originCarWithParking => :query,
+      :maxCarDist => :query,
+      :onlyCar => :query,
+      :maxChanges => :query,
+      :additionalChangeTime => :query,
+      :disregardDefaultChangeMargin => :query,
+      :needJourneyDetail => :query,
+      :needGeo => :query,
+      :needItinerary => :query,
+      :numTrips => :query,
+      :format => :query,
+      :jsonpCallback => :query
     }
+
     %{}
     |> method(:get)
     |> url("/trip")

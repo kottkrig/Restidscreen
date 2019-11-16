@@ -4,17 +4,17 @@
 
 defmodule Reseplaneraren.Model.GeometryRef do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"ref"
+    :ref
   ]
 
   @type t :: %__MODULE__{
-    :"ref" => String.t
-  }
+          :ref => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.GeometryRef do
@@ -22,4 +22,3 @@ defimpl Poison.Decoder, for: Reseplaneraren.Model.GeometryRef do
     value
   end
 end
-

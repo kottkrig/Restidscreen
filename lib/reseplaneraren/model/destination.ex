@@ -4,55 +4,55 @@
 
 defmodule Reseplaneraren.Model.Destination do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"routeIdx",
+    :routeIdx,
     :"$",
-    :"cancelled",
-    :"track",
-    :"rtTrack",
-    :"type",
-    :"date",
-    :"Notes",
-    :"id",
-    :"rtDate",
-    :"time",
-    :"directdate",
-    :"name",
-    :"rtTime",
-    :"directtime"
+    :cancelled,
+    :track,
+    :rtTrack,
+    :type,
+    :date,
+    :Notes,
+    :id,
+    :rtDate,
+    :time,
+    :directdate,
+    :name,
+    :rtTime,
+    :directtime
   ]
 
   @type t :: %__MODULE__{
-    :"routeIdx" => String.t,
-    :"$" => String.t,
-    :"cancelled" => boolean(),
-    :"track" => String.t,
-    :"rtTrack" => String.t,
-    :"type" => String.t,
-    :"date" => Date.t,
-    :"Notes" => Notes,
-    :"id" => String.t,
-    :"rtDate" => Date.t,
-    :"time" => String.t,
-    :"directdate" => Date.t,
-    :"name" => String.t,
-    :"rtTime" => String.t,
-    :"directtime" => String.t
-  }
+          :routeIdx => String.t(),
+          :"$" => String.t(),
+          :cancelled => boolean(),
+          :track => String.t(),
+          :rtTrack => String.t(),
+          :type => String.t(),
+          :date => Date.t(),
+          :Notes => Notes,
+          :id => String.t(),
+          :rtDate => Date.t(),
+          :time => String.t(),
+          :directdate => Date.t(),
+          :name => String.t(),
+          :rtTime => String.t(),
+          :directtime => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Destination do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"date", :date, nil, options)
-    |> deserialize(:"Notes", :struct, Reseplaneraren.Model.Notes, options)
-    |> deserialize(:"rtDate", :date, nil, options)
-    |> deserialize(:"directdate", :date, nil, options)
+    |> deserialize(:date, :date, nil, options)
+    |> deserialize(:Notes, :struct, Reseplaneraren.Model.Notes, options)
+    |> deserialize(:rtDate, :date, nil, options)
+    |> deserialize(:directdate, :date, nil, options)
   end
 end
-

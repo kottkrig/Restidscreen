@@ -4,35 +4,35 @@
 
 defmodule Reseplaneraren.Model.LiveMap do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"time",
-    :"maxx",
-    :"maxy",
-    :"vehicles",
-    :"minx",
-    :"miny"
+    :time,
+    :maxx,
+    :maxy,
+    :vehicles,
+    :minx,
+    :miny
   ]
 
   @type t :: %__MODULE__{
-    :"time" => Date.t,
-    :"maxx" => float(),
-    :"maxy" => float(),
-    :"vehicles" => [Vehicle],
-    :"minx" => float(),
-    :"miny" => float()
-  }
+          :time => Date.t(),
+          :maxx => float(),
+          :maxy => float(),
+          :vehicles => [Vehicle],
+          :minx => float(),
+          :miny => float()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.LiveMap do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"time", :date, nil, options)
-    |> deserialize(:"vehicles", :list, Reseplaneraren.Model.Vehicle, options)
+    |> deserialize(:time, :date, nil, options)
+    |> deserialize(:vehicles, :list, Reseplaneraren.Model.Vehicle, options)
   end
 end
-

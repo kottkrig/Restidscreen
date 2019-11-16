@@ -4,35 +4,35 @@
 
 defmodule Reseplaneraren.Model.Geometry do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"errorText",
-    :"error",
-    :"serverdate",
-    :"servertime",
-    :"Points",
-    :"noNamespaceSchemaLocation"
+    :errorText,
+    :error,
+    :serverdate,
+    :servertime,
+    :Points,
+    :noNamespaceSchemaLocation
   ]
 
   @type t :: %__MODULE__{
-    :"errorText" => String.t,
-    :"error" => String.t,
-    :"serverdate" => Date.t,
-    :"servertime" => String.t,
-    :"Points" => [Points],
-    :"noNamespaceSchemaLocation" => String.t
-  }
+          :errorText => String.t(),
+          :error => String.t(),
+          :serverdate => Date.t(),
+          :servertime => String.t(),
+          :Points => [Points],
+          :noNamespaceSchemaLocation => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Geometry do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"serverdate", :date, nil, options)
-    |> deserialize(:"Points", :list, Reseplaneraren.Model.Points, options)
+    |> deserialize(:serverdate, :date, nil, options)
+    |> deserialize(:Points, :list, Reseplaneraren.Model.Points, options)
   end
 end
-

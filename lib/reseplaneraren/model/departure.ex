@@ -4,64 +4,64 @@
 
 defmodule Reseplaneraren.Model.Departure do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"fgColor",
-    :"stop",
-    :"booking",
-    :"direction",
-    :"JourneyDetailRef",
-    :"track",
-    :"rtTrack",
-    :"sname",
-    :"type",
-    :"date",
-    :"bgColor",
-    :"stroke",
-    :"rtDate",
-    :"time",
-    :"name",
-    :"rtTime",
-    :"night",
-    :"stopid",
-    :"journeyid",
-    :"accessibility"
+    :fgColor,
+    :stop,
+    :booking,
+    :direction,
+    :JourneyDetailRef,
+    :track,
+    :rtTrack,
+    :sname,
+    :type,
+    :date,
+    :bgColor,
+    :stroke,
+    :rtDate,
+    :time,
+    :name,
+    :rtTime,
+    :night,
+    :stopid,
+    :journeyid,
+    :accessibility
   ]
 
   @type t :: %__MODULE__{
-    :"fgColor" => String.t,
-    :"stop" => String.t,
-    :"booking" => boolean(),
-    :"direction" => String.t,
-    :"JourneyDetailRef" => JourneyDetailRef,
-    :"track" => String.t,
-    :"rtTrack" => String.t,
-    :"sname" => String.t,
-    :"type" => String.t,
-    :"date" => Date.t,
-    :"bgColor" => String.t,
-    :"stroke" => String.t,
-    :"rtDate" => Date.t,
-    :"time" => String.t,
-    :"name" => String.t,
-    :"rtTime" => String.t,
-    :"night" => boolean(),
-    :"stopid" => String.t,
-    :"journeyid" => String.t,
-    :"accessibility" => String.t
-  }
+          :fgColor => String.t(),
+          :stop => String.t(),
+          :booking => boolean(),
+          :direction => String.t(),
+          :JourneyDetailRef => JourneyDetailRef,
+          :track => String.t(),
+          :rtTrack => String.t(),
+          :sname => String.t(),
+          :type => String.t(),
+          :date => Date.t(),
+          :bgColor => String.t(),
+          :stroke => String.t(),
+          :rtDate => Date.t(),
+          :time => String.t(),
+          :name => String.t(),
+          :rtTime => String.t(),
+          :night => boolean(),
+          :stopid => String.t(),
+          :journeyid => String.t(),
+          :accessibility => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Departure do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"JourneyDetailRef", :struct, Reseplaneraren.Model.JourneyDetailRef, options)
-    |> deserialize(:"date", :date, nil, options)
-    |> deserialize(:"rtDate", :date, nil, options)
+    |> deserialize(:JourneyDetailRef, :struct, Reseplaneraren.Model.JourneyDetailRef, options)
+    |> deserialize(:date, :date, nil, options)
+    |> deserialize(:rtDate, :date, nil, options)
   end
 end
-

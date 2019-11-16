@@ -10,7 +10,6 @@ defmodule Reseplaneraren.Api.ArrivalBoard do
   alias Reseplaneraren.Connection
   import Reseplaneraren.RequestBuilder
 
-
   @doc """
   Return the next 20 arrivals (or less if not existing) from a given point in time or the next arrivals in a given timespan.
   This method will return the next 20 arrivals (or less if not existing) from a given point in time or the next arrivals in a given timespan. The service can only be called for stops/stations by using according ID retrieved by the location method. The parameter is called id. The time and date are defined with the parameters date and time.
@@ -41,29 +40,37 @@ defmodule Reseplaneraren.Api.ArrivalBoard do
   {:ok, %Reseplaneraren.Model.ArrivalBoard{}} on success
   {:error, info} on failure
   """
-  @spec get_arrival_board(Tesla.Env.client, integer(), Date.t, String.t, integer(), keyword()) :: {:ok, Reseplaneraren.Model.ArrivalBoard.t} | {:error, Tesla.Env.t}
+  @spec get_arrival_board(
+          Tesla.Env.client(),
+          integer(),
+          Date.t(),
+          String.t(),
+          integer(),
+          keyword()
+        ) :: {:ok, Reseplaneraren.Model.ArrivalBoard.t()} | {:error, Tesla.Env.t()}
   def get_arrival_board(connection, id, date, time, direction, opts \\ []) do
     optional_params = %{
-      :"useVas" => :query,
-      :"useLDTrain" => :query,
-      :"useRegTrain" => :query,
-      :"useBus" => :query,
-      :"useBoat" => :query,
-      :"useTram" => :query,
-      :"excludeDR" => :query,
-      :"timeSpan" => :query,
-      :"maxDeparturesPerLine" => :query,
-      :"needJourneyDetail" => :query,
-      :"format" => :query,
-      :"jsonpCallback" => :query
+      :useVas => :query,
+      :useLDTrain => :query,
+      :useRegTrain => :query,
+      :useBus => :query,
+      :useBoat => :query,
+      :useTram => :query,
+      :excludeDR => :query,
+      :timeSpan => :query,
+      :maxDeparturesPerLine => :query,
+      :needJourneyDetail => :query,
+      :format => :query,
+      :jsonpCallback => :query
     }
+
     %{}
     |> method(:get)
     |> url("/arrivalBoard")
-    |> add_param(:query, :"id", id)
-    |> add_param(:query, :"date", date)
-    |> add_param(:query, :"time", time)
-    |> add_param(:query, :"direction", direction)
+    |> add_param(:query, :id, id)
+    |> add_param(:query, :date, date)
+    |> add_param(:query, :time, time)
+    |> add_param(:query, :direction, direction)
     |> add_optional_params(optional_params, opts)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()

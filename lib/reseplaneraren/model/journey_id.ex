@@ -4,21 +4,21 @@
 
 defmodule Reseplaneraren.Model.JourneyId do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"id",
-    :"routeIdxTo",
-    :"routeIdxFrom"
+    :id,
+    :routeIdxTo,
+    :routeIdxFrom
   ]
 
   @type t :: %__MODULE__{
-    :"id" => String.t,
-    :"routeIdxTo" => integer(),
-    :"routeIdxFrom" => integer()
-  }
+          :id => String.t(),
+          :routeIdxTo => integer(),
+          :routeIdxFrom => integer()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.JourneyId do
@@ -26,4 +26,3 @@ defimpl Poison.Decoder, for: Reseplaneraren.Model.JourneyId do
     value
   end
 end
-

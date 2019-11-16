@@ -10,7 +10,6 @@ defmodule Reseplaneraren.Api.Livemap do
   alias Reseplaneraren.Connection
   import Reseplaneraren.RequestBuilder
 
-
   @doc """
   Returns the positions of all vehicles in a given bounding box
   This method will return the positions of all vehicles in a given bounding box.
@@ -30,16 +29,24 @@ defmodule Reseplaneraren.Api.Livemap do
   {:ok, %Reseplaneraren.Model.LiveMap{}} on success
   {:error, info} on failure
   """
-  @spec livemap(Tesla.Env.client, String.t, String.t, String.t, String.t, String.t, keyword()) :: {:ok, Reseplaneraren.Model.LiveMap.t} | {:error, Tesla.Env.t}
+  @spec livemap(
+          Tesla.Env.client(),
+          String.t(),
+          String.t(),
+          String.t(),
+          String.t(),
+          String.t(),
+          keyword()
+        ) :: {:ok, Reseplaneraren.Model.LiveMap.t()} | {:error, Tesla.Env.t()}
   def livemap(connection, minx, maxx, miny, maxy, only_realtime, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/livemap")
-    |> add_param(:query, :"minx", minx)
-    |> add_param(:query, :"maxx", maxx)
-    |> add_param(:query, :"miny", miny)
-    |> add_param(:query, :"maxy", maxy)
-    |> add_param(:query, :"onlyRealtime", only_realtime)
+    |> add_param(:query, :minx, minx)
+    |> add_param(:query, :maxx, maxx)
+    |> add_param(:query, :miny, miny)
+    |> add_param(:query, :maxy, maxy)
+    |> add_param(:query, :onlyRealtime, only_realtime)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%Reseplaneraren.Model.LiveMap{})

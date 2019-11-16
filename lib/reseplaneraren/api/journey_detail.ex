@@ -10,7 +10,6 @@ defmodule Reseplaneraren.Api.JourneyDetail do
   alias Reseplaneraren.Connection
   import Reseplaneraren.RequestBuilder
 
-
   @doc """
   Returns information about the complete route of a trip.
   Delivers information about the complete route of a trip. This service can not be called directly but only by reference URLs in a result of a trip or departureBoard request. It contains a list of all stops/stations of this journey including all departure and arrival times (with real-time data if available) and additional information like specific attributes about facilities and other texts.
@@ -26,12 +25,13 @@ defmodule Reseplaneraren.Api.JourneyDetail do
   {:ok, %Reseplaneraren.Model.JourneyDetail{}} on success
   {:error, info} on failure
   """
-  @spec get_journey_detail(Tesla.Env.client, String.t, keyword()) :: {:ok, Reseplaneraren.Model.JourneyDetail.t} | {:error, Tesla.Env.t}
+  @spec get_journey_detail(Tesla.Env.client(), String.t(), keyword()) ::
+          {:ok, Reseplaneraren.Model.JourneyDetail.t()} | {:error, Tesla.Env.t()}
   def get_journey_detail(connection, ref, _opts \\ []) do
     %{}
     |> method(:get)
     |> url("/journeyDetail")
-    |> add_param(:query, :"ref", ref)
+    |> add_param(:query, :ref, ref)
     |> Enum.into([])
     |> (&Connection.request(connection, &1)).()
     |> decode(%Reseplaneraren.Model.JourneyDetail{})

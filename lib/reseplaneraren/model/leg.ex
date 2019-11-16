@@ -4,66 +4,66 @@
 
 defmodule Reseplaneraren.Model.Leg do
   @moduledoc """
-  
+
   """
 
   @derive [Poison.Encoder]
   defstruct [
-    :"fgColor",
-    :"booking",
-    :"direction",
-    :"JourneyDetailRef",
-    :"cancelled",
-    :"kcal",
-    :"Origin",
-    :"sname",
-    :"type",
-    :"GeometryRef",
-    :"bgColor",
-    :"Notes",
-    :"id",
-    :"stroke",
-    :"reachable",
-    :"name",
-    :"night",
-    :"Destination",
-    :"percentBikeRoad",
-    :"accessibility"
+    :fgColor,
+    :booking,
+    :direction,
+    :JourneyDetailRef,
+    :cancelled,
+    :kcal,
+    :Origin,
+    :sname,
+    :type,
+    :GeometryRef,
+    :bgColor,
+    :Notes,
+    :id,
+    :stroke,
+    :reachable,
+    :name,
+    :night,
+    :Destination,
+    :percentBikeRoad,
+    :accessibility
   ]
 
   @type t :: %__MODULE__{
-    :"fgColor" => String.t,
-    :"booking" => boolean(),
-    :"direction" => String.t,
-    :"JourneyDetailRef" => JourneyDetailRef,
-    :"cancelled" => boolean(),
-    :"kcal" => float(),
-    :"Origin" => Origin,
-    :"sname" => String.t,
-    :"type" => String.t,
-    :"GeometryRef" => GeometryRef,
-    :"bgColor" => String.t,
-    :"Notes" => Notes,
-    :"id" => String.t,
-    :"stroke" => String.t,
-    :"reachable" => boolean(),
-    :"name" => String.t,
-    :"night" => boolean(),
-    :"Destination" => Destination,
-    :"percentBikeRoad" => float(),
-    :"accessibility" => String.t
-  }
+          :fgColor => String.t(),
+          :booking => boolean(),
+          :direction => String.t(),
+          :JourneyDetailRef => JourneyDetailRef,
+          :cancelled => boolean(),
+          :kcal => float(),
+          :Origin => Origin,
+          :sname => String.t(),
+          :type => String.t(),
+          :GeometryRef => GeometryRef,
+          :bgColor => String.t(),
+          :Notes => Notes,
+          :id => String.t(),
+          :stroke => String.t(),
+          :reachable => boolean(),
+          :name => String.t(),
+          :night => boolean(),
+          :Destination => Destination,
+          :percentBikeRoad => float(),
+          :accessibility => String.t()
+        }
 end
 
 defimpl Poison.Decoder, for: Reseplaneraren.Model.Leg do
   import Reseplaneraren.Deserializer
+
   def decode(value, options) do
     value
-    |> deserialize(:"JourneyDetailRef", :struct, Reseplaneraren.Model.JourneyDetailRef, options)
-    |> deserialize(:"Origin", :struct, Reseplaneraren.Model.Origin, options)
-    |> deserialize(:"GeometryRef", :struct, Reseplaneraren.Model.GeometryRef, options)
-    |> deserialize(:"Notes", :struct, Reseplaneraren.Model.Notes, options)
-    |> deserialize(:"Destination", :struct, Reseplaneraren.Model.Destination, options)
+    |> deserialize(:JourneyDetailRef, :struct, Reseplaneraren.Model.JourneyDetailRef, options)
+    |> deserialize(:Origin, :struct, Reseplaneraren.Model.Origin, options)
+    |> deserialize(:GeometryRef, :struct, Reseplaneraren.Model.GeometryRef, options)
+    |> deserialize(:Notes, :struct, Reseplaneraren.Model.Notes, options)
+    |> deserialize(:Destination, :struct, Reseplaneraren.Model.Destination, options)
   end
 end
-
