@@ -1,21 +1,17 @@
 # Restid
 
-**TODO: Add description**
+An e-ink screen that displays departure time of relevant Västtrafik trips.
 
-## Installation
+## Quick start
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `restid` to your list of dependencies in `mix.exs`:
+Install dependencies
 
-```elixir
-def deps do
-  [
-    {:restid, "~> 0.1.0"}
-  ]
-end
+```bash
+mix deps.get
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/restid](https://hexdocs.pm/restid).
+Start application in interactive mode
 
+```bash
+iex -S mix
+```
