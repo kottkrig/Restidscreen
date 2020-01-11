@@ -16,6 +16,7 @@ defmodule Restid.Api do
     )
     |> parse_results()
     |> trim_leading_walk_directions()
+    |> trim_trailing_walk_directions()
   end
 
   defp client() do
@@ -38,6 +39,19 @@ defmodule Restid.Api do
       Enum.map(trips, fn trip ->
         update_in(trip, ["Leg"], fn legs ->
           Enum.drop_while(legs, fn leg -> leg["type"] === "WALK" end)
+        end)
+      end)
+    end)
+  end
+
+  defp trim_trailing_walk_directions(trips_result) do
+    update_in(trips_result, ["TripList", "Trip"], fn trips ->
+      Enum.map(trips, fn trip ->
+        update_in(trip, ["Leg"], fn legs ->
+          legs
+          |> Enum.reverse()
+          |> Enum.drop_while(fn leg -> leg["type"] === "WALK" end)
+          |> Enum.reverse()
         end)
       end)
     end)
