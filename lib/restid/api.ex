@@ -1,8 +1,21 @@
 defmodule Restid.Api do
+  @moduledoc """
+  A wrapper around the Vasttrafik Elixir API
+  """
   use Tesla
 
   alias Restid.Model.Location
 
+  @doc """
+  Returns the trips from a given `origin` to a given `destination`.
+
+  ## Examples
+
+    iex> origin = %Location{name: "Seglaregatan", lat: 57.690368, long: 11.919743}
+    iex> destination = %Location{name: "Centralstationen", lat: 57.708713, long: 11.973301}
+    iex> Restid.Api.get_trips(origin, destination)
+    [%Trip{}]
+  """
   def get_trips(%Location{} = origin, %Location{} = destination) do
     client()
     |> Reseplaneraren.Api.Trip.get_trip(

@@ -1,4 +1,8 @@
 defmodule Auth do
+  @moduledoc """
+  A GenServer that holds the Vasttrafik
+  auth token and renews it when it expires.
+  """
   use GenServer
 
   def start_link(_opts) do
@@ -9,6 +13,14 @@ defmodule Auth do
     {:ok, %{access_token: nil, expires_at: nil}}
   end
 
+  @doc """
+  Returns a valid token
+
+  ## Examples
+
+    iex> Auth.get_token()
+    %String
+  """
   def get_token do
     GenServer.call(__MODULE__, :get_token)
   end
