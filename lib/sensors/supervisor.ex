@@ -1,7 +1,8 @@
-# a simple supervisor that starts up the Scenic.SensorPubSub server
-# and any set of other sensor processes
-
 defmodule Restid.Sensor.Supervisor do
+  @moduledoc """
+  A simple supervisor that starts up the Scenic.SensorPubSub server
+  and any set of other sensor processes
+  """
   use Supervisor
 
   alias Restid.Sensor.Trips

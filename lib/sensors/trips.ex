@@ -1,4 +1,8 @@
 defmodule Restid.Sensor.Trips do
+  @moduledoc """
+  A GenServer that fetches trips from the API and
+  publishes them to a Scenic.Sensor.
+  """
   use GenServer
 
   alias Scenic.Sensor

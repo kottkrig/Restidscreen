@@ -1,4 +1,7 @@
 defmodule Restid.Scene.Main do
+  @moduledoc """
+  The main Scenic.Scene that shows a list of trips.
+  """
   use Scenic.Scene
   alias Scenic.Graph
   alias Scenic.Sensor
