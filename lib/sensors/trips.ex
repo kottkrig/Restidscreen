@@ -22,7 +22,7 @@ defmodule Restid.Sensor.Trips do
 
     Sensor.publish(:trips, [])
 
-    Process.send_after(self(), :poll, @poll_interval)
+    Process.send_after(self(), :poll, 0)
     {:ok, %{origin: origin, destinations: destinations}}
   end
 
