@@ -29,7 +29,6 @@ defmodule Restid.MixProject do
     [
       {:tesla, "~> 0.8"},
       {:poison, ">= 1.0.0"},
-
       {:scenic, "~> 0.10"},
       {:scenic_driver_glfw, "~> 0.10", targets: :host},
 
