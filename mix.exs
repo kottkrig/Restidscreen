@@ -6,6 +6,7 @@ defmodule Restid.MixProject do
       app: :restid,
       version: "0.1.0",
       elixir: "~> 1.9",
+      build_embedded: true,
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -27,7 +28,15 @@ defmodule Restid.MixProject do
   defp deps do
     [
       {:tesla, "~> 0.8"},
-      {:poison, ">= 1.0.0"}
+      {:poison, ">= 1.0.0"},
+
+      {:scenic, "~> 0.10"},
+      {:scenic_driver_glfw, "~> 0.10", targets: :host},
+
+      # These deps are optional and are included as they are often used.
+      # If your app doesn't need them, they are safe to remove.
+      {:scenic_sensor, "~> 0.7"},
+      {:scenic_clock, "~> 0.10"}
     ]
   end
 end
