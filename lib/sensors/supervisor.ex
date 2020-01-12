@@ -12,18 +12,16 @@ defmodule Restid.Sensor.Supervisor do
   end
 
   def init(:ok) do
-
     trips_config = %{
-      origin: %Restid.Model.Location{name: "Seglaregatan", lat: 57.690368, long: 11.919743},
-      destinations: [
-        %Restid.Model.Location{name: "ETC", lat: 57.702259, long: 11.954376},
-        %Restid.Model.Location{name: "Centralstationen", lat: 57.708713, long: 11.973301}
-      ]
+      origin: struct(Restid.Model.Location, Application.get_env(:restid, :origin)),
+      destinations:
+        Application.get_env(:restid, :destinations)
+        |> Enum.map(&struct(Restid.Model.Location, &1))
     }
 
     children = [
       Scenic.Sensor,
-      {Trips, trips_config},
+      {Trips, trips_config}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
