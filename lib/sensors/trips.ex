@@ -35,8 +35,8 @@ defmodule Restid.Sensor.Trips do
     Sensor.publish(:trips, trips)
 
     trips
-      |> Enum.map(&Restid.Utils.Trips.to_string/1)
-      |> Enum.map(&IO.puts/1)
+    |> Enum.map(&Restid.Utils.Trips.to_string/1)
+    |> Enum.map(&IO.puts/1)
 
     Process.send_after(self(), :poll, @poll_interval)
 
