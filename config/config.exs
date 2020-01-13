@@ -16,3 +16,4 @@ targeting =
   end
 
 import_config "#{targeting}.exs"
+import_config "secret.exs"
