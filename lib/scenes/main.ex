@@ -25,7 +25,7 @@ defmodule Restid.Scene.Main do
   def handle_info({:sensor, :data, {:trips, trips, _}}, graph) do
     content =
       trips
-      |> Enum.map(&Restid.Utils.Trips.to_string/1)
+      |> Enum.map(&Restid.Utils.Trips.to_pretty_string/1)
       |> Enum.join("\n")
 
     graph =
