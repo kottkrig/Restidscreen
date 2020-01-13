@@ -7,6 +7,7 @@ An e-ink screen that displays departure time of relevant Västtrafik trips.
 Install dependencies
 
 ```bash
+set -x MIX_TARGET host
 mix deps.get
 ```
 
