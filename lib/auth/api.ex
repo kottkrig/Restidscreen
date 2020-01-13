@@ -16,8 +16,8 @@ defmodule Auth.Api do
   end
 
   defp encode_authorization_header() do
-    key = Application.fetch_env!(:restid, :vasttrafik_key)
-    secret = Application.fetch_env!(:restid, :vasttrafik_secret)
+    key = Application.get_env(:restid, :vasttrafik_api_key)
+    secret = Application.get_env(:restid, :vasttrafik_api_secret)
     "Basic " <> Base.encode64("#{key}:#{secret}")
   end
 end

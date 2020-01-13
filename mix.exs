@@ -16,10 +16,6 @@ defmodule Restid.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      env: [
-        vasttrafik_key: "OfOgXW0iWyYRMNKXMlV1h5ypKz4a",
-        vasttrafik_secret: "dX0zOV8UenVNRy567tBtL1oKApQa"
-      ],
       mod: {Restid.Application, []}
     ]
   end
