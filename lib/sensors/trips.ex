@@ -29,7 +29,7 @@ defmodule Restid.Sensor.Trips do
   def handle_info(:poll, state) do
     trips =
       state.destinations
-      |> Enum.map(&Restid.Api.get_trips(state.origin, &1))
+      |> Enum.map(&Restid.get_trips(state.origin, &1))
       |> Enum.flat_map(&get_in(&1, ["TripList", "Trip"]))
 
     Sensor.publish(:trips, trips)
