@@ -70,6 +70,14 @@ mix firmware
 mix firmware.burn
 ```
 
+Ensure that Nerves is up and running by pinging it or SSH:ing to it
+
+```bash
+ping nerves.local
+
+ssh nerves.local
+```
+
 Generate a nerves script to upload updates via the network
 
 ```bash

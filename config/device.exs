@@ -45,9 +45,9 @@ config :nerves_network, :default,
     key_mgmt: String.to_atom(key_mgmt)
   ]
 
-config :eink, :viewport, %{
+config :restid, :viewport, %{
   name: :main_viewport,
-  default_scene: {Eink.Scene.Main, nil},
+  default_scene: {Restid.Scene.Main, nil},
   # Note: Match these to your inky display
   size: {400, 300},
   opts: [scale: 1.0],
