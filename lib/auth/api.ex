@@ -13,6 +13,16 @@ defmodule Auth.Api do
 
   def get_token() do
     post("/token", "grant_type=client_credentials&scope=device_test")
+    |> parse_result()
+  end
+
+  defp parse_result(result) do
+    current_time = System.system_time(:second)
+
+    %Auth.Model.Token{
+      access_token: result.body["access_token"],
+      expires_at: current_time + result.body["expires_in"]
+    }
   end
 
   defp encode_authorization_header() do

@@ -16,4 +16,5 @@ targeting =
   end
 
 import_config "#{targeting}.exs"
+import_config "env/#{Mix.env()}.exs"
 import_config "secret.exs"
