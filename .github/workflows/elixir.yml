@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - name: Add dummy file ./config/secret.exs
+      run: cp ./config/secret.example.exs ./config/secret.exs
     - name: Install Dependencies
       run: |
         mix local.rebar --force
