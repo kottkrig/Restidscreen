@@ -54,7 +54,7 @@ Burn the initial firmware
 
 ```bash
 # Set the correct target device in the env variable MIX_TARGET
-set -x MIX_TARGET rpi4
+set -x MIX_TARGET rpi3
 
 # Configure the Nerves network connection by setting env variables
 set -x NERVES_NETWORK_SSID "YOUR WIFI SSID NAME"
@@ -68,6 +68,14 @@ mix firmware
 
 # Burn the firmware to a SD card
 mix firmware.burn
+```
+
+Ensure that Nerves is up and running by pinging it or SSH:ing to it
+
+```bash
+ping nerves.local
+
+ssh nerves.local
 ```
 
 Generate a nerves script to upload updates via the network

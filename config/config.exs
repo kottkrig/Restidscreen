@@ -9,6 +9,8 @@ config :restid, :destinations, [
   %{name: "Centralstationen", lat: 57.708713, long: 11.973301}
 ]
 
+config :restid, target: Mix.target()
+
 targeting =
   case Mix.target() do
     :host -> :host
