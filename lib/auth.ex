@@ -12,7 +12,7 @@ defmodule Auth do
   end
 
   def init(:ok) do
-    {:ok, %Token{access_token: nil, expires_at: nil}}
+    {:ok, nil_token()}
   end
 
   @doc """
@@ -29,16 +29,23 @@ defmodule Auth do
 
   def handle_call(:get_token, _from, state) do
     if is_expired?(state) do
-      new_token = auth_api().get_token()
-      {:reply, new_token.access_token, new_token}
+      case auth_api().get_token() do
+        {:ok, new_token} ->
+          {:reply, {:ok, new_token.access_token}, new_token}
+
+        {:error, error} ->
+          {:reply, {:error, error}, nil_token()}
+      end
     else
-      {:reply, state.access_token, state}
+      {:reply, {:ok, state.access_token}, state}
     end
   end
 
   defp auth_api() do
     Application.get_env(:restid, :auth_api)
   end
+
+  defp nil_token, do: %Token{access_token: nil, expires_at: nil}
 
   def is_expired?(%Token{expires_at: nil}), do: true
 
