@@ -8,6 +8,7 @@ defmodule Auth.Api do
     "Content-Type" => "application/x-www-form-urlencoded"
   })
 
+  plug(Tesla.Middleware.Tuples)
   plug(Tesla.Middleware.JSON)
   plug(Tesla.Middleware.Logger)
 
@@ -16,13 +17,19 @@ defmodule Auth.Api do
     |> parse_result()
   end
 
-  defp parse_result(result) do
+  defp parse_result({:ok, %Tesla.Env{body: body}}) do
     current_time = System.system_time(:second)
 
-    %Auth.Model.Token{
-      access_token: result.body["access_token"],
-      expires_at: current_time + result.body["expires_in"]
+    token = %Auth.Model.Token{
+      access_token: body["access_token"],
+      expires_at: current_time + body["expires_in"]
     }
+
+    {:ok, token}
+  end
+
+  defp parse_result({:error, error}) do
+    {:error, error}
   end
 
   defp encode_authorization_header() do

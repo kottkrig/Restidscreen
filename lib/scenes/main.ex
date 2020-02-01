@@ -15,7 +15,7 @@ defmodule Restid.Scene.Main do
   def init(_, _) do
     graph =
       Graph.build(font_size: @font_size, font: @font)
-      |> text("Blipp", id: :content, translate: {0, 20})
+      |> text("Resor har inte kunnat laddas än", id: :content, translate: {0, 20})
 
     Sensor.subscribe(:trips)
 

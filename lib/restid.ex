@@ -14,27 +14,34 @@ defmodule Restid do
       iex> origin = %Location{name: "Seglaregatan", lat: 57.690368, long: 11.919743}
       iex> destination = %Location{name: "Centralstationen", lat: 57.708713, long: 11.973301}
       iex> Restid.get_trips(origin, destination)
-      [%Trip{}]
+      {:ok, [%Trip{}]}
   """
   def get_trips(%Location{} = origin, %Location{} = destination) do
-    client()
-    |> Reseplaneraren.Api.Trip.get_trip(
-      originCoordLat: origin.lat,
-      originCoordLong: origin.long,
-      originCoordName: origin.name,
-      destCoordLat: destination.lat,
-      destCoordLong: destination.long,
-      destCoordName: destination.name,
-      format: "json"
-    )
-    |> parse_results()
-    |> trim_leading_walk_directions()
-    |> trim_trailing_walk_directions()
+    case Auth.get_token() do
+      {:error, error} ->
+        {:error, error}
+
+      {:ok, token} ->
+        trips =
+          client(token)
+          |> Reseplaneraren.Api.Trip.get_trip(
+            originCoordLat: origin.lat,
+            originCoordLong: origin.long,
+            originCoordName: origin.name,
+            destCoordLat: destination.lat,
+            destCoordLong: destination.long,
+            destCoordName: destination.name,
+            format: "json"
+          )
+          |> parse_results()
+          |> trim_leading_walk_directions()
+          |> trim_trailing_walk_directions()
+
+        {:ok, trips}
+    end
   end
 
-  defp client() do
-    token = Auth.get_token()
-
+  defp client(token) do
     Tesla.build_client([
       {Tesla.Middleware.Headers,
        %{"Authorization" => "Bearer " <> token, "Accept" => "application/json"}},
