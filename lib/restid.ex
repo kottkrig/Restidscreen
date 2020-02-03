@@ -4,13 +4,14 @@ defmodule Restid do
   """
   use Tesla
 
-  alias Restid.Model.Location
+  alias Restid.Request.Location
 
   @doc """
   Returns the trips from a given `origin` to a given `destination`.
 
   ## Examples
 
+      iex> alias Restid.Request.Location
       iex> origin = %Location{name: "Seglaregatan", lat: 57.690368, long: 11.919743}
       iex> destination = %Location{name: "Centralstationen", lat: 57.708713, long: 11.973301}
       iex> Restid.get_trips(origin, destination)

@@ -13,10 +13,10 @@ defmodule Restid.Sensor.Supervisor do
 
   def init(:ok) do
     trips_config = %{
-      origin: struct(Restid.Model.Location, Application.get_env(:restid, :origin)),
+      origin: struct(Restid.Request.Location, Application.get_env(:restid, :origin)),
       destinations:
         Application.get_env(:restid, :destinations)
-        |> Enum.map(&struct(Restid.Model.Location, &1))
+        |> Enum.map(&struct(Restid.Request.Location, &1))
     }
 
     children = [
