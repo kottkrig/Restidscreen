@@ -29,19 +29,30 @@ defmodule Restid.Scene.Main do
 
     Sensor.subscribe(:trips)
 
-    {:ok, graph, push: graph}
+    state = %{graph: graph, viewport: opts[:viewport]}
+
+    {:ok, state, push: graph}
   end
 
-  def handle_info({:sensor, :data, {:trips, trips, _}}, graph) do
-    content =
-      trips
-      |> Enum.map(&Restid.Utils.Trips.to_pretty_string/1)
-      |> Enum.join("\n")
+  def handle_info({:sensor, :data, {:trips, trips, _}}, state) do
+    {:ok, %Scenic.ViewPort.Status{size: {width, height}}} =
+      state.viewport
+      |> Scenic.ViewPort.info()
 
     graph =
-      graph
-      |> Graph.modify(:content, &text(&1, content))
+      Graph.build(font_size: @font_size, font: @font, theme: :light)
+      |> rectangle({width, height}, fill: :white)
 
-    {:noreply, graph, push: graph}
+    graph =
+      trips
+      |> Enum.with_index()
+      |> Enum.reduce(graph, fn {trip, i}, g ->
+        g
+        |> Restid.Component.Trip.add_to_graph(trip,
+          translate: {5, i * 60}
+        )
+      end)
+
+    {:noreply, state, push: graph}
   end
 end
