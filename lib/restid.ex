@@ -52,27 +52,4 @@ defmodule Restid do
   # for some reason all the api calls returns an error
   # but the value seems to be parsed properly
   defp parse_results({:error, %Poison.ParseError{value: json}}), do: json
-
-  defp trim_leading_walk_directions(trips_result) do
-    update_in(trips_result, ["TripList", "Trip"], fn trips ->
-      Enum.map(trips, fn trip ->
-        update_in(trip, ["Leg"], fn legs ->
-          Enum.drop_while(legs, fn leg -> leg["type"] === "WALK" end)
-        end)
-      end)
-    end)
-  end
-
-  defp trim_trailing_walk_directions(trips_result) do
-    update_in(trips_result, ["TripList", "Trip"], fn trips ->
-      Enum.map(trips, fn trip ->
-        update_in(trip, ["Leg"], fn legs ->
-          legs
-          |> Enum.reverse()
-          |> Enum.drop_while(fn leg -> leg["type"] === "WALK" end)
-          |> Enum.reverse()
-        end)
-      end)
-    end)
-  end
 end
