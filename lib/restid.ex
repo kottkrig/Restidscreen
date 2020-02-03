@@ -22,7 +22,7 @@ defmodule Restid do
         {:error, error}
 
       {:ok, token} ->
-        trips =
+        response =
           client(token)
           |> Reseplaneraren.Api.Trip.get_trip(
             originCoordLat: origin.lat,
@@ -34,10 +34,9 @@ defmodule Restid do
             format: "json"
           )
           |> parse_results()
-          |> trim_leading_walk_directions()
-          |> trim_trailing_walk_directions()
+          |> Restid.Response.parse_from_json()
 
-        {:ok, trips}
+        {:ok, response}
     end
   end
 

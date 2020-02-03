@@ -31,14 +31,10 @@ defmodule Restid.Sensor.Trips do
       state.destinations
       |> Enum.map(&Restid.get_trips(state.origin, &1))
       |> Enum.filter(&match?({:ok, _}, &1))
-      |> Enum.map(fn {:ok, trips} -> trips end)
-      |> Enum.flat_map(&get_in(&1, ["TripList", "Trip"]))
+      |> Enum.map(fn {:ok, response} -> response end)
+      |> Enum.flat_map(fn r -> r.trips end)
 
     Sensor.publish(:trips, trips)
-
-    trips
-    |> Enum.map(&Restid.Utils.Trips.to_string/1)
-    |> Enum.map(&IO.puts/1)
 
     Process.send_after(self(), :poll, @poll_interval)
 
