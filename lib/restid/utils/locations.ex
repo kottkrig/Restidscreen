@@ -1,5 +1,5 @@
 defmodule Restid.Utils.Locations do
-  alias Restid.Model.Location
+  alias Restid.Request.Location
 
   def seglaregatan do
     %Location{name: "Seglaregatan", lat: 57.690368, long: 11.919743}
