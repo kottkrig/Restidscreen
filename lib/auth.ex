@@ -21,7 +21,7 @@ defmodule Auth do
   ## Examples
 
     iex> Auth.get_token()
-    "ACCESS_TOKEN_FROM_AUTH_API"
+    {:ok, "ACCESS_TOKEN_FROM_AUTH_API"}
   """
   def get_token do
     GenServer.call(__MODULE__, :get_token)
