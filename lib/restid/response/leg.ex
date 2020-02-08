@@ -6,6 +6,7 @@ defmodule Restid.Response.Leg do
     :type,
     :origin,
     :destination,
+    :direction,
     :expected_departure_date_time,
     :expected_arrival_date_time
   ]
@@ -21,6 +22,7 @@ defmodule Restid.Response.Leg do
       type: parse_type(json["type"]),
       origin: origin,
       destination: destination,
+      direction: json["direction"],
       expected_departure_date_time: get_time_from_stop(origin),
       expected_arrival_date_time: get_time_from_stop(destination)
     }
