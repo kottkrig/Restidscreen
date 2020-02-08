@@ -9,13 +9,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Add secrets file
+      run: cp ./config/secret.example.exs ./config/secret.exs
     - name: Setup elixir
       uses: actions/setup-elixir@v1
       with:
         elixir-version: 1.9.4 # Define the elixir version [required]
         otp-version: 22.2 # Define the OTP version [required]
-    - name: Add secrets file
-      run: cp ./config/secret.example.exs ./config/secret.exs
     - name: Install nerves_bootstrap
       run: mix archive.install hex nerves_bootstrap
     - name: Install Dependencies
