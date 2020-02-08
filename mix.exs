@@ -13,10 +13,16 @@ defmodule Restid.MixProject do
       archives: [nerves_bootstrap: "~> 1.7"],
       build_embedded: true,
       start_permanent: Mix.env() == :prod,
-      aliases: [loadconfig: [&bootstrap/1]],
+      aliases: [loadconfig: [&bootstrap/1]] ++ aliases(),
       deps: deps(),
       releases: [{@app, release()}],
       preferred_cli_target: [run: :host, test: :host]
+    ]
+  end
+
+  defp aliases do
+    [
+      test: "test --no-start"
     ]
   end
 

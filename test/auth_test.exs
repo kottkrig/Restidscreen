@@ -2,10 +2,10 @@ defmodule AuthTest do
   use ExUnit.Case
   doctest Auth
 
-  # setup do
-  #   auth = start_supervised!(Auth)
-  #   %{auth: auth}
-  # end
+  setup do
+    auth = start_supervised!(Auth)
+    %{auth: auth}
+  end
 
   test "token not expired" do
     valid_token = %Auth.Model.Token{
