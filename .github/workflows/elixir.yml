@@ -1,0 +1,28 @@
+name: Elixir CI
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install scenic dependencies
+      run: sudo apt-get update && sudo apt-get install pkgconf libglfw3 libglfw3-dev libglew2.0 libglew-dev
+    - name: Add secrets file
+      run: cp ./config/secret.example.exs ./config/secret.exs
+    - name: Setup elixir
+      uses: actions/setup-elixir@v1
+      with:
+        elixir-version: 1.9.4 # Define the elixir version [required]
+        otp-version: 22.2 # Define the OTP version [required]
+    - name: Install nerves_bootstrap
+      run: mix archive.install --force hex nerves_bootstrap
+    - name: Install Dependencies
+      run: mix deps.get
+      env:
+        MIX_TARGET: host
+    - name: Run Tests
+      run: mix test
