@@ -5,7 +5,7 @@ defmodule Restid.Response.Stop do
     %Restid.Response.Stop{
       id: json["id"],
       name: json["name"],
-      short_name: json["name"],
+      short_name: parse_short_name(json["name"]),
       type: parse_type(json["type"]),
       real_time_date_time: parse_date_time(json["rtDate"], json["rtTime"]),
       scheduled_date_time: parse_date_time(json["date"], json["time"])
@@ -25,5 +25,11 @@ defmodule Restid.Response.Stop do
       {:ok, date_time} -> date_time
       _ -> nil
     end
+  end
+
+  defp parse_short_name(name_string) do
+    name_string
+    |> String.split(", ")
+    |> List.first()
   end
 end
