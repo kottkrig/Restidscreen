@@ -3,9 +3,6 @@ defmodule Restid.Component.Trip do
   import Scenic.Primitives
 
   alias Scenic.Graph
-  alias Scenic.ViewPort
-
-  @height 60
 
   @graph Graph.build()
          |> text("ca XX min",
