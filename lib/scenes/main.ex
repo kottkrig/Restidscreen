@@ -8,7 +8,6 @@ defmodule Restid.Scene.Main do
   alias Scenic.Sensor
 
   import Scenic.Primitives
-  import Scenic.Components
 
   @font :roboto
   @font_size 20
