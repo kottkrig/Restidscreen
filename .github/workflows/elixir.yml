@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install scenic dependencies
-      run: sudo apt-get install pkgconf libglfw3 libglfw3-dev libglew2.0 libglew-dev
+      run: sudo apt-get update && apt-get install pkgconf libglfw3 libglfw3-dev libglew2.0 libglew-dev
     - name: Add secrets file
       run: cp ./config/secret.example.exs ./config/secret.exs
     - name: Setup elixir
