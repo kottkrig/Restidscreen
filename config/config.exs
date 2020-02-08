@@ -29,6 +29,8 @@ targeting =
     _ -> :device
   end
 
+config :timex, default_locale: "sv"
+
 import_config "#{targeting}.exs"
 import_config "env/#{Mix.env()}.exs"
 import_config "secret.exs"
