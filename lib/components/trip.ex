@@ -8,26 +8,26 @@ defmodule Restid.Component.Trip do
   @height 60
 
   @graph Graph.build()
-         |> text("",
+         |> text("ca XX min",
            id: :departure_time,
-           text_align: :left_top,
+           text_align: :right_top,
            fill: :black,
-           translate: {0, 0},
-           font_size: 50
+           translate: {395, 0},
+           font_size: 40
          )
-         |> text("Spårvagn 9",
+         |> text("Spårvagn 9, mot Angered",
            id: :description,
            text_align: :left_top,
            fill: :black,
            font_size: 20,
-           translate: {115, 5}
+           translate: {0, 5}
          )
-         |> text("Framme kl XX:XX",
-           id: :arrival_time,
+         |> text("Från Jaegerdorfsplatsen",
+           id: :origin_name,
            text_align: :left_top,
            fill: :black,
            font_size: 20,
-           translate: {115, 25}
+           translate: {0, 25}
          )
 
   def info(data),
@@ -48,10 +48,13 @@ defmodule Restid.Component.Trip do
       @graph
       |> Graph.modify(:_root_, &update_opts(&1, styles: opts[:styles]))
       |> Graph.modify(:description, &text(&1, format_description(trip)))
-      |> Graph.modify(:departure_time, &text(&1, format_time(trip.expected_departure_date_time)))
       |> Graph.modify(
-        :arrival_time,
-        &text(&1, "Framme kl #{format_time(trip.expected_arrival_date_time)}")
+        :departure_time,
+        &text(&1, format_time(trip.current_server_date_time, trip.expected_departure_date_time))
+      )
+      |> Graph.modify(
+        :origin_name,
+        &text(&1, format_origin(trip))
       )
 
     state = %{
@@ -62,29 +65,43 @@ defmodule Restid.Component.Trip do
     {:ok, state, push: graph}
   end
 
-  defp format_time({:real_time, date_time}) do
-    "#{pad(date_time.hour)}:#{pad(date_time.minute)}"
+  defp format_time(%NaiveDateTime{} = server_date_time, {:real_time, date_time}) do
+    server_date_time
+    |> NaiveDateTime.diff(date_time)
+    |> Timex.Duration.from_seconds()
+    |> Timex.format_duration(:humanized)
+    |> shorten_time_string()
   end
 
-  defp format_time({:scheduled, date_time}) do
-    "~#{pad(date_time.hour)}:#{pad(date_time.minute)}"
+  defp format_time(%NaiveDateTime{} = server_date_time, {:scheduled, date_time}) do
+    formatted_duration =
+      server_date_time
+      |> NaiveDateTime.diff(date_time)
+      |> Timex.Duration.from_seconds()
+      |> Timex.format_duration(:humanized)
+      |> shorten_time_string()
+
+    "ca #{formatted_duration}"
   end
 
-  defp format_time(:unknown) do
-    "N/A"
+  defp shorten_time_string(time_string) do
+    time_string
+    |> String.replace("minuter", "min")
   end
 
-  defp format_time(%NaiveDateTime{} = date_time) do
-    "#{pad(date_time.hour)}:#{pad(date_time.minute)}"
-  end
-
-  defp pad(number) do
-    String.pad_leading("#{number}", 2, "0")
-  end
+  defp format_description(%Restid.Response.Trip{legs: []}), do: "N/A"
 
   defp format_description(%Restid.Response.Trip{legs: legs}) do
-    legs
-    |> Enum.map(&Map.get(&1, :name))
-    |> Enum.join(", ")
+    first_leg = List.first(legs)
+
+    "#{first_leg.name}, mot #{first_leg.direction}"
+  end
+
+  defp format_origin(%Restid.Response.Trip{legs: []}), do: "N/A"
+
+  defp format_origin(%Restid.Response.Trip{legs: legs}) do
+    first_leg = List.first(legs)
+
+    "Från #{first_leg.origin.short_name}"
   end
 end
