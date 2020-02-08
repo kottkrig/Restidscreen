@@ -1,6 +1,10 @@
 defmodule Restid.Response do
   defstruct [:server_date_time, :trips]
 
+  def parse_result({:ok, json}) do
+    parse_from_json(json)
+  end
+
   def parse_from_json(json) do
     server_date_time =
       NaiveDateTime.from_iso8601!(
