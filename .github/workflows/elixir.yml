@@ -20,5 +20,7 @@ jobs:
       run: mix archive.install --force hex nerves_bootstrap
     - name: Install Dependencies
       run: mix deps.get
+      env:
+        MIX_TARGET: host
     - name: Run Tests
       run: mix test
