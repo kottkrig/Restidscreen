@@ -36,7 +36,7 @@ defmodule Restid.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :runtime_tools],
+      extra_applications: [:logger, :runtime_tools, :timex],
       mod: {Restid.Application, []}
     ]
   end
@@ -44,6 +44,7 @@ defmodule Restid.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:timex, "~> 3.0"},
       {:tesla, "~> 0.8"},
       {:sentry, "~> 7.0"},
       {:poison, ">= 1.0.0"},
