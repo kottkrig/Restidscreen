@@ -31,6 +31,8 @@ targeting =
 
 config :timex, default_locale: "sv"
 
+config :tzdata, :autoupdate, :disabled
+
 import_config "#{targeting}.exs"
 import_config "env/#{Mix.env()}.exs"
 import_config "secret.exs"
