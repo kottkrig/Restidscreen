@@ -66,7 +66,7 @@ config :restid, :viewport, %{
       opts: [
         # Note: Match these to your Inky display
         type: :what,
-        accent: :red,
+        accent: :black,
         opts: %{
           border: :black
         }
