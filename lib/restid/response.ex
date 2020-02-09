@@ -2,7 +2,15 @@ defmodule Restid.Response do
   defstruct [:server_date_time, :trips]
 
   def parse_result({:ok, json}) do
-    parse_from_json(json)
+    {:ok, parse_from_json(json)}
+  end
+
+  def parse_result({:error, %Tesla.Error{message: message}}) do
+    {:error, message}
+  end
+
+  def parse_result({:error, error}) do
+    {:error, error}
   end
 
   def parse_from_json(json) do
