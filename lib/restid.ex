@@ -21,8 +21,6 @@ defmodule Restid do
     response =
       restid_api().get_trips(origin, destination)
       |> Restid.Response.parse_result()
-
-    {:ok, response}
   end
 
   defp restid_api() do
