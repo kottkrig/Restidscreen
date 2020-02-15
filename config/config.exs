@@ -2,6 +2,18 @@ use Mix.Config
 
 alias Restid.Model.Location
 
+config :sentry,
+  dsn: "https://55c445b1ea20434aa886a8cbce13beb6@sentry.io/2543939",
+  environment_name: Mix.env(),
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!(),
+  tags: %{
+    env: "production",
+    target: Mix.target()
+  },
+  included_environments: [:prod],
+  json_library: Poison
+
 config :restid, :origin, %{name: "Seglaregatan", lat: 57.690368, long: 11.919743}
 
 config :restid, :destinations, [

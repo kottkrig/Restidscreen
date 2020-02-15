@@ -45,6 +45,7 @@ defmodule Restid.MixProject do
   defp deps do
     [
       {:tesla, "~> 0.8"},
+      {:sentry, "~> 7.0"},
       {:poison, ">= 1.0.0"},
       {:scenic, "~> 0.10"},
       {:scenic_driver_inky, "~> 1.0", targets: @all_targets},
