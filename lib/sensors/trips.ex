@@ -11,7 +11,7 @@ defmodule Restid.Sensor.Trips do
   @version "0.1.0"
   @description "Trips sensor"
 
-  @poll_interval 10_000
+  @poll_interval 30_000
 
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts, name: @name)
