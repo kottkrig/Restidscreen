@@ -11,7 +11,7 @@ config :nerves, source_date_epoch: "1578826697"
 # Use Ringlogger as the logger backend and remove :console.
 # See https://hexdocs.pm/ring_logger/readme.html for more information on
 # configuring ring_logger.
-config :logger, backends: [RingLogger]
+config :logger, backends: [RingLogger, Sentry.LoggerBackend]
 
 config :shoehorn,
   init: [:nerves_runtime, :nerves_init_gadget],
