@@ -21,8 +21,6 @@ defmodule Restid.Api.Http do
             format: "json"
           )
           |> parse_results()
-
-        {:ok, response}
     end
   end
 
@@ -37,5 +35,7 @@ defmodule Restid.Api.Http do
 
   # for some reason all the api calls returns an error
   # but the value seems to be parsed properly
-  defp parse_results({:error, %Poison.ParseError{value: json}}), do: json
+  defp parse_results({:error, %Poison.ParseError{value: json}}), do: {:ok, json}
+
+  defp parse_results({:error, %Tesla.Env{} = _tesla}), do: {:error, "Unknown Tesla runtime error"}
 end
