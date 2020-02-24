@@ -24,8 +24,6 @@ jobs:
       run: mix deps.get
       env:
         MIX_TARGET: host
-    - name: mix compile --warnings-as-errors
-      run: mix compile --warnings-as-errors
     - name: mix format --check-formatted
       run: mix format --check-formatted
     - name: Run Tests
