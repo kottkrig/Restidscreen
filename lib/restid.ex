@@ -18,9 +18,8 @@ defmodule Restid do
       ~N[2020-02-08 12:16:00]
   """
   def get_trips(%Location{} = origin, %Location{} = destination) do
-    response =
-      restid_api().get_trips(origin, destination)
-      |> Restid.Response.parse_result()
+    restid_api().get_trips(origin, destination)
+    |> Restid.Response.parse_result()
   end
 
   defp restid_api() do
