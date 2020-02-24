@@ -58,4 +58,8 @@ defmodule Restid.Scene.Main do
   def handle_info({:sensor, :unregistered, :trips}, state) do
     {:noreply, state}
   end
+
+  def handle_info({:sensor, :registered, _}, state) do
+    {:noreply, state}
+  end
 end
