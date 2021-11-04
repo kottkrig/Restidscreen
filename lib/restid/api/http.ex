@@ -38,4 +38,5 @@ defmodule Restid.Api.Http do
   defp parse_results({:error, %Poison.ParseError{value: json}}), do: {:ok, json}
 
   defp parse_results({:error, %Tesla.Env{body: json} = _tesla}), do: {:ok, json}
+  defp parse_results({:ok, json}), do: {:ok, json}
 end
