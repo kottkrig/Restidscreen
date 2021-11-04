@@ -28,8 +28,8 @@ defmodule Restid.Api.Http do
     Tesla.build_client([
       {Tesla.Middleware.Headers,
        %{"Authorization" => "Bearer " <> token, "Accept" => "application/json"}},
-      Tesla.Middleware.JSON,
-      Tesla.Middleware.DebugLogger
+      Tesla.Middleware.JSON
+      # Tesla.Middleware.DebugLogger
     ])
   end
 
