@@ -133,6 +133,6 @@ defmodule Reseplaneraren.RequestBuilder do
   @spec decode(Tesla.Env.t() | term(), false | struct() | [struct()]) ::
           {:ok, struct()} | {:error, Tesla.Env.t()} | {:error, term()}
   def decode(%Tesla.Env{status: 200} = env, false), do: {:ok, env}
-  def decode(%Tesla.Env{status: 200, body: body}, struct), do: Poison.decode(body, as: struct)
+  def decode(%Tesla.Env{status: 200, body: body}, struct), do: {:ok, body}
   def decode(response, _struct), do: {:error, response}
 end
