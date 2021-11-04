@@ -14,7 +14,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 [Install Nerves dependencies](https://hexdocs.pm/nerves/installation.html)
 
-
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
@@ -28,7 +27,7 @@ cp ./config/secret.example.exs ./config/secret.exs
 Install dependencies
 
 ```bash
-set -x MIX_TARGET host
+export MIX_TARGET=host
 mix deps.get
 ```
 
@@ -40,7 +39,7 @@ iex -S mix
 
 ## Running the tests
 
-Tests can be run with 
+Tests can be run with
 
 ```bash
 mix test
@@ -54,11 +53,11 @@ Burn the initial firmware
 
 ```bash
 # Set the correct target device in the env variable MIX_TARGET
-set -x MIX_TARGET rpi3
+export MIX_TARGET=rpi3a
 
 # Configure the Nerves network connection by setting env variables
-set -x NERVES_NETWORK_SSID "YOUR WIFI SSID NAME"
-set -x NERVES_NETWORK_PSK "YOUR WIFI PASSWORD"
+export NERVES_NETWORK_SSID="YOUR WIFI SSID NAME"
+export NERVES_NETWORK_PSK="YOUR WIFI PASSWORD"
 
 # Fetch the dependencies for the device specified in MIX_TARGET
 mix deps.get
@@ -90,7 +89,6 @@ Compile and push updates via the network
 mix firmware
 ./upload.sh
 ```
-
 
 ## Acknowledgments
 
