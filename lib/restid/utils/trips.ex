@@ -4,15 +4,11 @@ defmodule Restid.Utils.Trips do
     |> Enum.reduce("", fn leg, acc ->
       case acc do
         "" ->
-          "Kl #{leg["Origin"]["rtTime"]} – #{leg["name"]} (mot #{leg["direction"]}) från #{
-            leg["Origin"]["name"]
-          } till #{leg["Destination"]["name"]}"
+          "Kl #{leg["Origin"]["rtTime"]} – #{leg["name"]} (mot #{leg["direction"]}) från #{leg["Origin"]["name"]} till #{leg["Destination"]["name"]}"
 
         acc ->
           acc <>
-            ", byte till #{leg["name"]} (mot #{leg["direction"]}) till #{
-              leg["Destination"]["name"]
-            }"
+            ", byte till #{leg["name"]} (mot #{leg["direction"]}) till #{leg["Destination"]["name"]}"
       end
     end)
   end
@@ -22,15 +18,14 @@ defmodule Restid.Utils.Trips do
     |> Enum.reduce("", fn leg, acc ->
       case acc do
         "" ->
-          "Kl #{leg["Origin"]["rtTime"]} – #{leg["name"]} (mot #{leg["direction"]})\n                    Från #{
-            prettify_location_name(leg["Origin"]["name"])
-          } till #{prettify_location_name(leg["Destination"]["name"])}"
+          """
+          Kl #{leg["Origin"]["rtTime"]} – #{leg["name"]} (mot #{leg["direction"]})\n
+          Från #{prettify_location_name(leg["Origin"]["name"])} till #{prettify_location_name(leg["Destination"]["name"])}
+          """
 
         acc ->
           acc <>
-            ", byte till #{leg["name"]} (mot #{leg["direction"]}) till #{
-              prettify_location_name(leg["Destination"]["name"])
-            }"
+            ", byte till #{leg["name"]} (mot #{leg["direction"]}) till #{prettify_location_name(leg["Destination"]["name"])}"
       end
     end)
   end
@@ -40,5 +35,4 @@ defmodule Restid.Utils.Trips do
     |> String.split(", ")
     |> Enum.take(1)
   end
-
 end

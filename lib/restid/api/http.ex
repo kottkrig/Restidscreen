@@ -28,8 +28,8 @@ defmodule Restid.Api.Http do
     Tesla.build_client([
       {Tesla.Middleware.Headers,
        %{"Authorization" => "Bearer " <> token, "Accept" => "application/json"}},
-      Tesla.Middleware.JSON,
-      Tesla.Middleware.DebugLogger
+      Tesla.Middleware.JSON
+      # Tesla.Middleware.DebugLogger
     ])
   end
 
@@ -37,5 +37,6 @@ defmodule Restid.Api.Http do
   # but the value seems to be parsed properly
   defp parse_results({:error, %Poison.ParseError{value: json}}), do: {:ok, json}
 
-  defp parse_results({:error, %Tesla.Env{} = _tesla}), do: {:error, "Unknown Tesla runtime error"}
+  defp parse_results({:error, %Tesla.Env{body: json} = _tesla}), do: {:ok, json}
+  defp parse_results({:ok, json}), do: {:ok, json}
 end

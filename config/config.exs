@@ -1,6 +1,8 @@
-use Mix.Config
+import Config
 
 alias Restid.Model.Location
+
+config :gettext, default_locale: "sv"
 
 config :sentry,
   dsn: "https://55c445b1ea20434aa886a8cbce13beb6@sentry.io/2543939",
@@ -14,14 +16,25 @@ config :sentry,
   included_environments: [:prod],
   json_library: Poison
 
-config :restid, :origin, %{name: "Seglaregatan", lat: 57.690368, long: 11.919743}
+config :restid, :origin, %{name: "Kabelgatan", lat: 57.691189, long: 11.923879}
 
 config :restid, :destinations, [
   %{name: "ETC", lat: 57.702259, long: 11.954376},
   %{name: "Centralstationen", lat: 57.708713, long: 11.973301}
 ]
 
+# Enable the Nerves integration with Mix
+Application.start(:nerves_bootstrap)
+
 config :restid, target: Mix.target()
+
+# Customize non-Elixir parts of the firmware. See
+# https://hexdocs.pm/nerves/advanced-configuration.html for details.
+config :nerves, :firmware, rootfs_overlay: "rootfs_overlay"
+
+# Set the SOURCE_DATE_EPOCH date for reproducible builds.
+# See https://reproducible-builds.org/docs/source-date-epoch/ for more information
+config :nerves, source_date_epoch: "1578826697"
 
 targeting =
   case Mix.target() do
