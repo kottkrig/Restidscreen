@@ -92,6 +92,7 @@ defmodule Restid.Component.Trip do
     first_leg = List.first(legs)
 
     "#{first_leg.name}, mot #{first_leg.direction}"
+    |> remove_unwanted_text()
   end
 
   defp format_origin(%Restid.Response.Trip{legs: []}), do: "N/A"
@@ -100,5 +101,10 @@ defmodule Restid.Component.Trip do
     first_leg = List.first(legs)
 
     "Från #{first_leg.origin.short_name}"
+  end
+
+  defp remove_unwanted_text(string) do
+    string
+    |> String.replace(", Påstigning fram", "")
   end
 end
