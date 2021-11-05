@@ -1,5 +1,7 @@
 # Restid
 
+<img align="right" width="400" height="600" src="./photo.jpg" />
+
 An e-ink screen that displays departure time of relevant Västtrafik trips.
 
 ## Getting Started
