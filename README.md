@@ -1,5 +1,7 @@
 # Restid
 
+<img align="right" width="250" height="195.5" src="./photo.webp" />
+
 An e-ink screen that displays departure time of relevant Västtrafik trips.
 
 ## Getting Started
@@ -15,8 +17,6 @@ These instructions will get you a copy of the project up and running on your loc
 [Install Nerves dependencies](https://hexdocs.pm/nerves/installation.html)
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running
 
 Add api key and secret from [Västtrafik developer portal](https://developer.vasttrafik.se) to `./config/secret.exs`
 
