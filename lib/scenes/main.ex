@@ -42,13 +42,25 @@ defmodule Restid.Scene.Main do
       Graph.build(font_size: @font_size, font: @font, theme: :light)
       |> rectangle({width, height}, fill: :white)
 
+    {:ok, {:temperature, temperature, _}} = Scenic.Sensor.get(:temperature)
+
+    graph =
+      graph
+      |> text("#{temperature}°",
+        text_align: :center_top,
+        fill: :black,
+        font_size: 40,
+        translate: {width / 2, 5}
+      )
+      |> line({{0, 50}, {width, 50}}, fill: :black)
+
     graph =
       trips
       |> Enum.with_index()
       |> Enum.reduce(graph, fn {trip, i}, g ->
         g
         |> Restid.Component.Trip.add_to_graph(trip,
-          translate: {5, i * 60}
+          translate: {5, (i + 1) * 60}
         )
       end)
 
