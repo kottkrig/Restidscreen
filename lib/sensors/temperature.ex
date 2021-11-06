@@ -22,7 +22,7 @@ defmodule Restid.Sensor.Temperature do
 
     Sensor.publish(:temperature, [])
 
-    Process.send_after(self(), :poll, 0)
+    Process.send_after(self(), :poll, 10_000)
     {:ok, %{origin: origin}}
   end
 
