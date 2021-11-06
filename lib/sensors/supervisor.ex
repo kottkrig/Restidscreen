@@ -6,6 +6,7 @@ defmodule Restid.Sensor.Supervisor do
   use Supervisor
 
   alias Restid.Sensor.Trips
+  alias Restid.Sensor.Temperature
 
   def start_link(_) do
     Supervisor.start_link(__MODULE__, :ok)
@@ -19,9 +20,14 @@ defmodule Restid.Sensor.Supervisor do
         |> Enum.map(&struct(Restid.Request.Location, &1))
     }
 
+    temperature_config = %{
+      origin: struct(Restid.Request.Location, Application.get_env(:restid, :origin))
+    }
+
     children = [
       Scenic.Sensor,
-      {Trips, trips_config}
+      {Trips, trips_config},
+      {Temperature, temperature_config}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
