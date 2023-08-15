@@ -93,3 +93,4 @@ mix firmware
 ## Acknowledgments
 
 - [An eInk display with Nerves & Elixir - Getting started with Inky](https://underjord.io/an-eink-display-with-nerves-elixir.html), thank you @lawik for a great resource that got me started with Nerves and Scenic
+
